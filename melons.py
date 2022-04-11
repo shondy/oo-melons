@@ -113,31 +113,3 @@ except TooManyMelonsError as e:
 
 #https://docs.python.org/3/tutorial/errors.html #args
 
-class TodoItem:
-    """A todo."""
-
-    def __init__(self, title):
-        self.title = title
-        self.done = False
-
-
-class TodoList:
-    """A list of todos."""
-
-    def __init__(self):
-        self.todos = []
-
-    def append_todo(self, todo_item):
-        self.todos.append(todo_item)
-
-
-tasks = TodoList()
-tasks.append_todo(TodoItem("Buy ice cream"))
-tasks.append_todo(TodoItem("Eat cheese"))
-tasks.append_todo(TodoItem("Hug a puppy"))
-
-values = []
-for task in tasks.todos:
-    values.append(task.done)
-
-print(values)
