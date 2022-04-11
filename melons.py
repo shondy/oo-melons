@@ -6,6 +6,7 @@ class TooManyMelonsError(ValueError):
     def __init__(self, message='No more than 100 melons.'):
         super().__init__(message)
         
+# https://bytes.com/topic/python/answers/43335-__init__-method-raising-exceptions
 
 class AbstractMelonOrder:
     """An abstract base class that other Melon Orders inherit from."""
@@ -13,7 +14,7 @@ class AbstractMelonOrder:
     def __init__(self, species, qty, tax, order_type):
         """Initialize melon order attributes."""
 
-        #https://stackoverflow.com/questions/20059766/handle-exception-in-init
+        # https://stackoverflow.com/questions/20059766/handle-exception-in-init
         if qty > 100:
             raise TooManyMelonsError
 
@@ -38,7 +39,8 @@ class AbstractMelonOrder:
 
         self.shipped = True
 
-    def get_base_price(self):
+    @staticmethod
+    def get_base_price():
         #add extra $4/each melon during 8-11am Mon- Fri
         base_price = random.randint(5,9)
         now = datetime.now()
@@ -109,3 +111,33 @@ try:
 except TooManyMelonsError as e:
     print(e.args[0])
 
+#https://docs.python.org/3/tutorial/errors.html #args
+
+class TodoItem:
+    """A todo."""
+
+    def __init__(self, title):
+        self.title = title
+        self.done = False
+
+
+class TodoList:
+    """A list of todos."""
+
+    def __init__(self):
+        self.todos = []
+
+    def append_todo(self, todo_item):
+        self.todos.append(todo_item)
+
+
+tasks = TodoList()
+tasks.append_todo(TodoItem("Buy ice cream"))
+tasks.append_todo(TodoItem("Eat cheese"))
+tasks.append_todo(TodoItem("Hug a puppy"))
+
+values = []
+for task in tasks.todos:
+    values.append(task.done)
+
+print(values)
